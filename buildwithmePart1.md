@@ -194,3 +194,85 @@ class PostAdmin(admin.ModelAdmin):
     ordering = ['status', 'publish']
     show_facets = admin.ShowFacets.ALWAYS
 ```
+
+# Django ORM
+
+### 1. Creating Objects
+
+<p>The below method is creating an object in memory and then persisted to database </p>
+
+```commandline
+>>> from django.contrib.auth.models import User
+>>> from blog.models import Post
+>>> user = User.objects.get(username='pradivblogadmin')
+>>> post = Post(title="Another post"),
+>>> post = Post(title="Another post", slug="another-post",body="Post body.",author=user)
+>>> post.save()
+```
+
+<p> The below is to create the object and presist it to the database in single operation</p>
+
+```commandline
+>>> Post.objects.create(title="one more post", slug="one-more-post",body="Post body.", author=user)
+<Post: one more post>
+>>> user, created = User.objects.get_or_create(username="pradivsecondaryadmin")
+```
+### 2. Updating Objects
+
+```commandline
+>>> post.title = "New Title"
+>>> post.save()
+```
+### 3. Retrieving Objects
+
+```commandline
+>>> all_posts = Post.objects.all()
+>>> Post.objects.all()
+<QuerySet [<Post: one more post>, <Post: New Title>, <Post: Django Blog post update>, <Post: Testing Django Blog Post>]>
+>>> 
+```
+### 4. Filtering Objects
+
+```commandline
+>>> post = Post.objects.filter(title="Testing Django Blog Post")
+>>> print(post.query)
+SELECT "blog_post"."id", "blog_post"."title", "blog_post"."slug", "blog_post"."author_id", "blog_post"."body", "blog_post"."publish", "blog_post"."created", "blog_post"."updated", "blog_post"."status" FROM "blog_post" WHERE "blog_post"."title" = Testing Django Blog Post ORDER BY "blog_post"."publish" DESC
+>>> 
+
+```
+### 5. Using Field lookups
+```commandline
+
+```
+### 6. Chaining filters
+```commandline
+
+```
+### 7. Excluding objects
+```commandline
+
+```
+### 8. Ordering objects
+```commandline
+
+```
+### 9. Limiting QuerySets
+```commandline
+
+```
+### 10.Counting object and checking if it exisiting
+```commandline
+
+```
+
+```commandline
+
+```
+### 11. Deleting Objects
+```commandline
+
+```
+### 12. Creating model managers
+```commandline
+
+```
